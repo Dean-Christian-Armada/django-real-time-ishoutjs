@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from django.contrib.auth.models import User
 from django.db import models
 
 from drealtime import iShoutClient
@@ -13,9 +14,11 @@ class Section(models.Model):
 		return self.name
 
 	def save(self, *args, **kwargs):
-		ishout_client.emit(
-			1,
-			'alertchannel',
-			data={'msg':'%s has been added' % self.name}
-		)
+		users = User.objects.filter()
+		for x in users:
+			ishout_client.emit(
+				x.id,
+				'alertchannel',
+				data={'msg':'%s has been added' % self.name}
+			)
 		super(Section, self).save(*args, **kwargs)
