@@ -1,0 +1,24 @@
+{% load drealtimetags %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	{% autoescape off %}{% ishout_js  %}{% endautoescape %}
+</head>
+<body>
+	{% for x in sections %}
+		{{ x }}
+	{% endfor %}
+	<br />User now: {{ request.user }} - {{ request.user.id }}
+	<div id="new"></div>
+	<script type="text/javascript">
+		// alert(JSON.stringify(ishout));
+		ishout.on('alertchannel', function(data){
+	    alert(data.msg);
+	    var div = document.getElementById('new');
+	  	div.innerHTML = div.innerHTML + data.msg;
+		});
+		ishout.init();
+	</script>
+</body>
+</html>

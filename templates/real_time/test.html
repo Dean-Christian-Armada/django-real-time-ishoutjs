@@ -1,0 +1,21 @@
+{% load drealtimetags %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	{% autoescape off %}{% ishout_js  %}{% endautoescape %}
+	<script type="text/javascript">
+		// alert(JSON.stringify(ishout));
+		ishout.on('alertchannel', function(data){
+			alert('dean');
+	    alert(data.msg);
+		});
+		ishout.init();
+	</script>
+</head>
+<body>
+	{% for x in users %}
+	<br />{{ x }} - Click <a href="{% url 'real_time_alert' %}?user={{ x.id }}">{{ x }}</a>
+	{% endfor %}
+</body>
+</html>
